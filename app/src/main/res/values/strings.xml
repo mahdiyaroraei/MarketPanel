@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">MarketPanel</string>
+
+    <string name="search">جست و جو</string>
+    <string name="sort">مرتب سازی</string>
+    <string name="cat_sample">عنوان تست</string>
+    <string name="product_name">نام محصول</string>
+    <string name="add_picture">اضافه کردن تصویر</string>
+    <string name="select">انتخاب کنید</string>
+    <string name="add_category">اضافه کردن دسته بندی جدید</string>
+    <string name="product_price">قیمت محصول</string>
+    <string name="product_off">قیمت با تخفیف</string>
+    <string name="product_desc">توضیحات</string>
+    <string name="product_category">دسته بندی</string>
+    <string name="product_images">تصاویر محصول</string>
+    <string name="add_product">اضافه کردن محصول</string>
+    <string name="product_name_hint">نام محصول را وارد کنید</string>
+    <string name="product_price_hint">قیمت محصول را وارد کنید</string>
+    <string name="product_off_hint">قیمت با تخفیف را وارد کنید</string>
+    <string name="select_pic">انتخاب</string>
+    <string-array name="sort">
+        <item>تازه ترین ها</item>
+        <item>آخرین بروزرسانی</item>
+        <item>موارد موجود</item>
+        <item>دارای تخفیف</item>
+        <item>کمترین قیمت</item>
+        <item>بیشترین قیمت</item>
+    </string-array>
+    <string name="shared_file_provider">com.nguyenhoanglam.imagepicker.provider.MarketPanel</string>
+    <string name="category_name">نام دسته بندی را بنویسید:</string>
+</resources>
