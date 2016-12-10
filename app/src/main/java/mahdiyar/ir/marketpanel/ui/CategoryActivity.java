@@ -51,7 +51,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     @OnClick(R.id.add_category_tv)
     public void addCategory() {
-        startActivityForResult(new Intent(getApplicationContext(), EditCategoryActivity.class), 0);
+        startActivityForResult(new Intent(getApplicationContext(), EditCategoryActivity.class), 1);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class CategoryActivity extends AppCompatActivity {
         getCategory();
     }
 
-    private void getCategory() {
+    public void getCategory() {
         categoryAdapter.clear();
         for (Category category :
                 ApplicationLoader.userInfo.getCategories()) {
@@ -84,39 +84,13 @@ public class CategoryActivity extends AppCompatActivity {
         categoryAdapter.withOnClickListener(new FastAdapter.OnClickListener() {
             @Override
             public boolean onClick(View v, IAdapter adapter, IItem item, int position) {
-                final CategoryItem categoryItem = (CategoryItem) item;
-                new SweetAlertDialog(CategoryActivity.this, SweetAlertDialog.WARNING_TYPE)
-                        .setTitleText("Are you sure?")
-                        .setContentText("Won't be able to recover this file!")
-                        .setConfirmText("Yes,delete it!")
-                        .setCustomImage(R.drawable.ic_garbage)
-                        .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
-                            @Override
-                            public void onClick(final SweetAlertDialog sDialog) {
-                                Call<String> call = ApplicationLoader.api.removeCategory(categoryItem.id, 7);
-                                call.enqueue(new Callback<String>() {
-                                    @Override
-                                    public void onResponse(Call<String> call, Response<String> response) {
-                                        sDialog
-                                                .setTitleText("Deleted!")
-                                                .setContentText("Your imaginary file has been deleted!")
-                                                .setConfirmText("OK")
-                                                .setConfirmClickListener(null)
-                                                .changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
-                                        ApplicationLoader.loadUserInfo();
-                                        categoryAdapter.remove(categoryAdapter.getAdapterPosition(categoryItem));
-                                    }
 
-                                    @Override
-                                    public void onFailure(Call<String> call, Throwable t) {
-
-                                    }
-                                });
-                            }
-                        })
-                        .show();
                 return true;
             }
         });
+    }
+
+    public FastItemAdapter getCategoryAdapter() {
+        return categoryAdapter;
     }
 }

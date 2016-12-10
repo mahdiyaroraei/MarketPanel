@@ -54,6 +54,11 @@ public class EditCategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_category);
 
         ButterKnife.bind(this);
+        getArgs();
+    }
+
+    private void getArgs() {
+
     }
 
     @OnClick(R.id.add_category_tv)
@@ -62,9 +67,13 @@ public class EditCategoryActivity extends AppCompatActivity {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                ApplicationLoader.loadUserInfo();
-                setResult(RESULT_OK);
-                finish();
+                ApplicationLoader.loadUserInfo(new ApplicationLoader.OnChangeUserInfo() {
+                    @Override
+                    public void onChange() {
+                        setResult(RESULT_OK);
+                        finish();
+                    }
+                });
             }
 
             @Override

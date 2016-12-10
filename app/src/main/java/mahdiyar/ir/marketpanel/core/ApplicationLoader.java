@@ -36,7 +36,7 @@ public class ApplicationLoader extends Application {
         api = ServiceGenerator.createService(PanelService.class);
     }
 
-    public static void loadUserInfo() {
+    public static void loadUserInfo(final OnChangeUserInfo onChangeUserInfo) {
         // Show loader gear
         Call<UserInfo> userInfoCall = ApplicationLoader.api.getUserInfo(7);
         userInfoCall.enqueue(new Callback<UserInfo>() {
@@ -44,6 +44,7 @@ public class ApplicationLoader extends Application {
             public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
                 if (response.code() == 200) {
                     ApplicationLoader.userInfo = response.body();
+                    onChangeUserInfo.onChange();
                 }
             }
 
@@ -52,6 +53,10 @@ public class ApplicationLoader extends Application {
 
             }
         });
+    }
+
+    public interface OnChangeUserInfo {
+        void onChange();
     }
 
 }
