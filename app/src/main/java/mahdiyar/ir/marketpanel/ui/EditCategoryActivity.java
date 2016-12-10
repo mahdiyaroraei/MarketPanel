@@ -42,6 +42,8 @@ public class EditCategoryActivity extends AppCompatActivity {
     EditText catEditText;
 
     private String url;
+    private String name;
+    private int id;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -58,12 +60,28 @@ public class EditCategoryActivity extends AppCompatActivity {
     }
 
     private void getArgs() {
+        id = getIntent().getIntExtra("id", 0);
+        name = getIntent().getStringExtra("name");
+        url = getIntent().getStringExtra("image_url");
 
+        if (id != 0) {
+            fillFields();
+        }
+    }
+
+    private void fillFields() {
+        catEditText.setText(name);
+        Glide.with(EditCategoryActivity.this).load(url).into(catImageView);
     }
 
     @OnClick(R.id.add_category_tv)
     public void addCategory() {
-        Call<String> call = ApplicationLoader.api.addCategory(url, catEditText.getText().toString(), 7);
+        Call<String> call;
+        if (id == 0) {
+            call = ApplicationLoader.api.addCategory(url, catEditText.getText().toString(), 7);
+        } else {
+            call = ApplicationLoader.api.editCategory(url, catEditText.getText().toString(), 7, id);
+        }
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

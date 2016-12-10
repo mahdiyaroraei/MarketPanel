@@ -84,6 +84,14 @@ public class CategoryActivity extends AppCompatActivity {
         categoryAdapter.withOnClickListener(new FastAdapter.OnClickListener() {
             @Override
             public boolean onClick(View v, IAdapter adapter, IItem item, int position) {
+                CategoryItem categoryItem = (CategoryItem) item;
+                Bundle bundle = new Bundle();
+                bundle.putInt("id", categoryItem.id);
+                bundle.putString("name", categoryItem.name);
+                bundle.putString("image_url", categoryItem.imageUrl);
+                Intent intent = new Intent(getApplicationContext(), EditCategoryActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
 
                 return true;
             }

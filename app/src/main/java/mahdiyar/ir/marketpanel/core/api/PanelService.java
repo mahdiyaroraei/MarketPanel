@@ -60,6 +60,10 @@ public interface PanelService {
     @FormUrlEncoded
     Call<String> addCategory(@Field("image") String image, @Field("name") String name, @Field("store_id") int storeId);
 
+    @POST("api.aspx?a=edit_store_cat")
+    @FormUrlEncoded
+    Call<String> editCategory(@Field("image") String image, @Field("name") String name, @Field("store_id") int storeId, @Field("cat_id") int catId);
+
     @POST("api.aspx?a=remove_store_cat")
     @FormUrlEncoded
     Call<String> removeCategory(@Field("cat_id") int catId, @Field("store_id") int storeId);
